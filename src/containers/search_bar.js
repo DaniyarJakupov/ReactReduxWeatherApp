@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from '../actions/index';
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
    constructor(props){
       super(props);
 
@@ -9,18 +12,29 @@ export default class SearchBar extends Component {
       };
       //Bind onInputChange() function to the component object
       this.onInputChange = this.onInputChange.bind(this);
+      this.onFormSubmit = this.onFormSubmit.bind(this);
    }
 
+   //Function for changing state of the component
    onInputChange(event){
       this.setState({term: event.target.value});
+   }
+
+   onFormSubmit(event){
+      // Preventing POST request from form
+      event.preventDefault();
+      // Fetch weather data
+      this.props.fetchWeather(this.state.term);
+      // Clear input
+      this.setState({term: ""});
    }
 
    render(){
       return(
          <div>
-            <form className="input-group">
+            <form onSubmit={this.onFormSubmit} className="input-group">
                <input
-                  placeholder="City"
+                  placeholder="What's the weather in ..."
                   className="form-control"
                   value={this.state.term}
                   onChange={this.onInputChange}
@@ -33,3 +47,17 @@ export default class SearchBar extends Component {
       );
    }
 }
+
+// Anything returned from this function will end up as props
+function mapDispatchToProps(dispatch){
+   // Whenever fetchWeather() is called, the result should be passed to all
+   // of our reducers.
+   return bindActionCreators({ fetchWeather }, dispatch);
+}
+//==========================================
+// Take component SearchBar, take function mapStateToProps()
+// and take function mapDispatchToProps() then
+//  promote BookList component to Container  (component that has state).
+// Make return values of above functions (e.g. books, selectBook) available
+// as a props in BookList class.
+export default connect(null, mapDispatchToProps)(SearchBar);
