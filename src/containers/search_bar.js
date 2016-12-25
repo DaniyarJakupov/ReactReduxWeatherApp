@@ -57,7 +57,7 @@ function mapDispatchToProps(dispatch){
 //==========================================
 // Take component SearchBar, take function mapStateToProps()
 // and take function mapDispatchToProps() then
-//  promote BookList component to Container  (component that has state).
-// Make return values of above functions (e.g. books, selectBook) available
-// as a props in BookList class.
+//  promote SearchBar component to Container  (component that has state).
+// Make return values of above functions (e.g. fetchWeather) available
+// as a props in SearchBar  class.
 export default connect(null, mapDispatchToProps)(SearchBar);
