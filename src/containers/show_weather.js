@@ -15,8 +15,6 @@ class ShowWeather extends Component {
       const pressureArray = cityData.list.map(weather => weather.main.pressure);
       const humidityArray = cityData.list.map(weather => weather.main.humidity);
 
-      console.log(tempArray);
-
       return(
          <tr key={name}>
             <td>{name}</td>
@@ -24,6 +22,7 @@ class ShowWeather extends Component {
             <td>{pressure}</td>
             <td>{humidity}</td>
             <td>{description}</td>
+            <td><Chart data={tempArray} /></td>
          </tr>
       );
    }
@@ -37,9 +36,10 @@ class ShowWeather extends Component {
                   <tr>
                      <th>City</th>
                      <th>Temperature, °C</th>
-                     <th>Pressure, Pa</th>
+                     <th>Pressure, hPa</th>
                      <th>Humidity, %</th>
                      <th>Description</th>
+                     <th>5-day forecast</th>
                   </tr>
                </thead>
                <tbody>
