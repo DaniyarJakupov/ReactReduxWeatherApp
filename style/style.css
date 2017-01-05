@@ -7,3 +7,8 @@ td, th {
    vertical-align: middle !important;
    text-align: center !important;
 }
+
+.googlemap {
+   width: 200px !important;
+   height: 250px !important;
+}
